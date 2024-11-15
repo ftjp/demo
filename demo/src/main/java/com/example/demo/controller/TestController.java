@@ -1,24 +1,16 @@
-package com.example.demo.task.adapter;
+package com.example.demo.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.example.demo.infruastructure.common.BaseResult;
 import com.example.demo.infruastructure.enums.BaseResultEnum;
 import com.example.demo.infruastructure.exception.BaseCustomException;
-import com.example.demo.task.domain.entity.RetryTask;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * description: 门店预约相关接口
- *
- * @author: LJP
- * @date: 2024/8/16 9:27
- */
+
 @RestController
 @RequestMapping("/demo/test")
 @Api(tags = "test")
@@ -27,14 +19,16 @@ public class TestController {
 
 
     @ApiOperation(value = "test接口", notes = "")
-    @PostMapping("/test")
-    public BaseResult<Void> test(@RequestBody RetryTask param) {
-        log.info("test接口:{}", JSON.toJSONString(param));
-        BaseResult<Void> result = new BaseResult<>();
+    @GetMapping("/test")
+    public BaseResult<String> test() {
+        log.info("test接口");
+        BaseResult<String> result = new BaseResult<>();
         result.setSuccess();
         try {
 
             System.out.println("*********************************");
+
+            result.setData("test");
 
         } catch (BaseCustomException e) {
             log.error("test接口: ", e);
