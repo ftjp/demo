@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 注意：文件名必须跟Dao类名字一致，因为是根据文件名做关联。 -->
+<mapper namespace="com.example.demo.retryTask.domain.mapper">
+    <update id="updateStatusByIds">
+        update t_sm_task set status = #{status},update_time = now(),version=version+1
+        where id in
+        <foreach item="item" index="index" collection="taskIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="batchUpdate">
+        <foreach item="retryTask" index="index" collection="retryTasks" open="" close="" separator=";">
+            update t_sm_task
+            set status = #{retryTask.status},update_time = now(),version=version+1,retry_count=#{retryTask.retryCount}
+            where id = #{retryTask.id}
+        </foreach>
+    </update>
+
+    <update id="batchUpdateAfterRetry">
+        <foreach item="retryTask" index="index" collection="retryTasks" open="" close="" separator=";">
+            update t_sm_task
+            set status = #{retryTask.status},description = #{retryTask.description},update_time =
+            now(),version=version+1,retry_count=retry_count+1
+            where id = #{retryTask.id} and status = 1
+        </foreach>
+    </update>
+</mapper>

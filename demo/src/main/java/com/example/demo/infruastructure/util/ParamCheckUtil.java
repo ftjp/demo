@@ -1,4 +1,4 @@
-package com.example.demo.util;
+package com.example.demo.infruastructure.util;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.CharSequenceUtil;

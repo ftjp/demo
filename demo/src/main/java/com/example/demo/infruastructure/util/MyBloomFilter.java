@@ -1,4 +1,4 @@
-package com.example.demo.util;
+package com.example.demo.infruastructure.util;
 
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
@@ -12,15 +12,15 @@ public class MyBloomFilter {
     /**
      * 预计插入的数据
      */
-    private static Integer expectedInsertions = 100000000;
+    private static final Integer expectedInsertions = 100000000;
     /**
      * 误判率
      */
-    private static Double fpp = 0.01;
+    private static final Double fpp = 0.01;
     /**
      * 布隆过滤器
      */
-    private static BloomFilter<Integer> bloomFilter = BloomFilter.create(Funnels.integerFunnel(), expectedInsertions, fpp);
+    private static final BloomFilter<Integer> bloomFilter = BloomFilter.create(Funnels.integerFunnel(), expectedInsertions, fpp);
 
     public static void main(String[] args) {
 
