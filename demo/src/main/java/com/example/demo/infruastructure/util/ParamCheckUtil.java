@@ -2,6 +2,7 @@ package com.example.demo.infruastructure.util;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.CharSequenceUtil;
+import com.example.demo.infruastructure.exception.BaseCustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -43,23 +44,23 @@ public class ParamCheckUtil {
             String name = params[i].toString();
             Object obj = params[i + 1];
             if (obj == null) {
-                throw new RuntimeException(String.format("[%s]是null", name));
+                throw new BaseCustomException(String.format("[%s]是null", name));
             }
             // 是否允许为空 字符串/集合/数组
             if (allowEmpty) {
                 continue;
             }
             if (obj instanceof String && CharSequenceUtil.isBlank(((String) obj))) {
-                throw new RuntimeException(String.format("[%s]是空字符串", name));
+                throw new BaseCustomException(String.format("[%s]是空字符串", name));
             }
             if (obj instanceof Collection && CollUtil.isEmpty((Collection) obj)) {
-                throw new RuntimeException(String.format("[%s]是空集合", name));
+                throw new BaseCustomException(String.format("[%s]是空集合", name));
             }
             if (obj instanceof Map && CollUtil.isEmpty((Map) obj)) {
-                throw new RuntimeException(String.format("[%s]是空Map", name));
+                throw new BaseCustomException(String.format("[%s]是空Map", name));
             }
             if (obj.getClass().isArray() && Array.getLength(obj) == 0) {
-                throw new RuntimeException(String.format("[%s]是空数组", name));
+                throw new BaseCustomException(String.format("[%s]是空数组", name));
             }
         }
     }

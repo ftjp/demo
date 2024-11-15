@@ -1,6 +1,9 @@
 package com.example.demo.infruastructure.util;
 
 
+import com.example.demo.infruastructure.enums.BaseResultEnum;
+import com.example.demo.infruastructure.exception.BaseCustomException;
+
 /**
  * description:
  *
@@ -19,27 +22,27 @@ public class ExceptionUtil {
      */
     public static void throwIfTrue(boolean throwAble, String message) {
         if (throwAble) {
-            throw new RuntimeException(message);
+            throw new BaseCustomException(message);
         }
     }
-//
-//    public static void throwIfTrue(boolean throwAble, String code, String msg) {
-//        if (throwAble) {
-//            throw new BaseCustomException(code, msg);
-//        }
-//    }
-//
-//    public static void throwIfTrue(boolean throwAble, String code, String msg, String data) {
-//        if (throwAble) {
-//            throw new BaseCustomException(code, msg, data);
-//        }
-//    }
-//
-//    public static void throwIfTrue(boolean throwAble, BaseResultEnum baseResultEnum) {
-//        if (throwAble) {
-//            throw new BaseCustomException(baseResultEnum);
-//        }
-//    }
+
+    public static void throwIfTrue(boolean throwAble, String code, String msg) {
+        if (throwAble) {
+            throw new BaseCustomException(code, msg);
+        }
+    }
+
+    public static void throwIfTrue(boolean throwAble, String code, String msg, String data) {
+        if (throwAble) {
+            throw new BaseCustomException(code, msg, data);
+        }
+    }
+
+    public static void throwIfTrue(boolean throwAble, BaseResultEnum baseResultEnum) {
+        if (throwAble) {
+            throw new BaseCustomException(baseResultEnum);
+        }
+    }
 
 
 }
